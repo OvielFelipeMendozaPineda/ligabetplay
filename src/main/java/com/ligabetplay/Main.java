@@ -5,6 +5,7 @@ import java.util.Scanner;
 
 import com.ligabetplay.models.Club;
 import com.ligabetplay.models.ClubMetric;
+import com.ligabetplay.models.CuerpoTecnico;
 import com.ligabetplay.models.Partido;
 
 public class Main {
@@ -32,7 +33,6 @@ public class Main {
         clubList.add(equipo8);
         clubList.add(equipo9);
         clubList.add(equipo10);
-
         boolean flag = true;
         while (flag) {
             Scanner input = new Scanner(System.in);

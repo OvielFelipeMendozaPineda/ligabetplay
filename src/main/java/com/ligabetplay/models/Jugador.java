@@ -19,7 +19,8 @@ public class Jugador extends Team {
         this.tarjetasAmarillas = tarjetasAmarillas;
         this.tarjetasRojas = tarjetasRojas;
     }
-
+    
+    
     public int getDorsal() {
         return dorsal;
     }
