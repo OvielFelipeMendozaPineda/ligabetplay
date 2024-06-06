@@ -5,23 +5,48 @@ import java.util.Scanner;
 
 public class Club {
     private String nombre;
+    private ArrayList<Jugador> plantel;
+    private ArrayList<CuerpoTecnico> cuerpoTecnico;
+    private ArrayList<CuerpoMedico> cuerpoMedico;
+    private int tp;
     private int pj;
     private int pg;
     private int pp;
     private int pe;
     private int gf;
     private int gc;
-    private int tp;
-
+    
     public Club(String nombre) {
         this.nombre = nombre;
+        this.plantel = new ArrayList<Jugador>();
+        this.cuerpoTecnico = new ArrayList<CuerpoTecnico>();
+        this.tp = 0;
         this.pj = 0;
         this.pg = 0;
         this.pp = 0;
         this.pe = 0;
         this.gf = 0;
         this.gc = 0;
-        this.tp = 0;
+    }
+
+    public void setPlantel(ArrayList<Jugador> plantel) {
+        this.plantel = plantel;
+    }
+
+    public ArrayList<CuerpoTecnico> getCuerpoTecnico() {
+        return cuerpoTecnico;
+    }
+
+    public void setCuerpoTecnico(ArrayList<CuerpoTecnico> cuerpoTecnico) {
+        this.cuerpoTecnico = cuerpoTecnico;
+    }
+
+    public ArrayList<CuerpoMedico> getCuerpoMedico() {
+        return cuerpoMedico;
+    }
+
+    public void setCuerpoMedico(ArrayList<CuerpoMedico> cuerpoMedico) {
+        this.cuerpoMedico = cuerpoMedico;
     }
 
     public String getNombre() {
@@ -87,6 +112,25 @@ public class Club {
     public void setTp(int tp) {
         this.tp += tp;
     }
+    
+    public ArrayList<Jugador> getPlantel() {
+        return plantel;
+    }
+    
+    public void agregarJugadorPlantel(Jugador jugador) {
+        this.plantel.add(jugador);
+        System.out.println("Se añadio correctamente el jugador al plantel");
+    }
+    
+    public void agregarCuerpoTecnico(CuerpoTecnico integrante) {
+        this.cuerpoTecnico.add(integrante);
+        System.out.println("Se añadio correctamente al cuerpo técnico");
+    }
+    public void agregarCuerpoMedico(CuerpoMedico integrante) {
+        this.cuerpoMedico.add(integrante);
+        System.out.println("Se añadio correctamente al cuerpo técnico");
+    }
+    
 
     public static void MostrarStats(ArrayList<Club> list) {
         for (Club club : list) {
@@ -157,5 +201,20 @@ public class Club {
         }
         System.out.println(mensaje + " " + team.getNombre());
     }
+
+    public static void ListarClubes(ArrayList<Club> clubList) {
+        int i = 0;
+        for (Club club : clubList) {
+            System.out.println(i+1+ "." + " " + club.getNombre());
+            i++;
+        }
+    }
+    public static void listarCuerpoTecnico(ArrayList<CuerpoTecnico> cuerpoTecnicoList) {
+        for (CuerpoTecnico integrante : cuerpoTecnicoList) {
+            System.out.println(String.format("Nombre: %s Rol: %s", integrante.getNombre(), integrante.getRol()));
+        }
+
+    }
+
 
 }

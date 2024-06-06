@@ -4,8 +4,8 @@ public class Team {
     int id;
     String nombre;
     String apellido;
-    String edad;
-    public Team(int id, String nombre, String apellido, String edad) {
+    int edad;
+    public Team(int id, String nombre, String apellido, int edad) {
         this.id = id;
         this.nombre = nombre;
         this.apellido = apellido;
@@ -29,10 +29,10 @@ public class Team {
     public void setApellido(String apellido) {
         this.apellido = apellido;
     }
-    public String getEdad() {
+    public int getEdad() {
         return edad;
     }
-    public void setEdad(String edad) {
+    public void setEdad(int edad) {
         this.edad = edad;
     }
     public void concentrarse() {

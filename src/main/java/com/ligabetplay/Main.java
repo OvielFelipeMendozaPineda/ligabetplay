@@ -1,11 +1,12 @@
 package com.ligabetplay;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.Scanner;
 
 import com.ligabetplay.models.Club;
 import com.ligabetplay.models.ClubMetric;
+import com.ligabetplay.models.CuerpoMedico;
 import com.ligabetplay.models.CuerpoTecnico;
+import com.ligabetplay.models.Jugador;
 import com.ligabetplay.models.Partido;
 
 public class Main {
@@ -33,11 +34,16 @@ public class Main {
         clubList.add(equipo8);
         clubList.add(equipo9);
         clubList.add(equipo10);
+        ArrayList<Jugador> playerList = new ArrayList<>(); // LiSTADO CON TODOS LOS JUGADORES
+        Jugador jugador0 = new Jugador(1, "Oviel Felipe", "Mendoza Pineda", 20, 4, "Lateral Derecho","Colombiana" , "2024-06-04", 15, 4, 0);
+        playerList.add(jugador0);
+        equipo2.agregarJugadorPlantel(jugador0);
+        int clubIndex;
         boolean flag = true;
         while (flag) {
             Scanner input = new Scanner(System.in);
             System.out.println("Gestor de clubes y partidos del FPC");
-            System.out.println("Selecciones una opcion\n\t1. Registrar Club.\n\t2. Registrar Partido\n\t3. Reportes.\n\t0. Cerrar.");
+            System.out.println("Selecciones una opcion\n\t1. Registrar Club.\n\t2. Registrar Partido\n\t3. Registrar jugador.\n\t4. Registrar Cuerpo técnico.\n\t5. Registrar cuerpo médico.\n\t6. Listar cuerpo médico.\n\t7. Reportes.\n\t0. Cerrar.");
             try {
                 int opcUser = input.nextInt();
                 switch (opcUser) {
@@ -46,10 +52,33 @@ public class Main {
                         clubList.add(nuevoClub);
                         break;
                     case 2:
-                    Partido.registrarPartido(clubList, input);
+                        Partido.registrarPartido(clubList, input);
                         break;
                     case 3:
-                    reportes(clubList, input);;
+                        Jugador.registrarJugador(input);
+                        break;
+                    case 4:
+                        CuerpoTecnico newCuerpoTecnico = CuerpoTecnico.registrarCuerpoTecnico(input);
+                        System.out.println("Asigne el equipo al que pertenece.\n");
+                        Club.ListarClubes(clubList);
+                        clubIndex = input.nextInt();
+                        clubList.get(clubIndex).agregarCuerpoTecnico(newCuerpoTecnico);
+                        break;
+                    case 5:
+                        CuerpoMedico newCuerpoMedico = CuerpoMedico.registrarCuerpoMedico(input);
+                        System.out.println("Asigne el equipo al que pertenece.\n");
+                        Club.ListarClubes(clubList);
+                        clubIndex = input.nextInt();
+                        clubList.get(clubIndex).agregarCuerpoMedico(newCuerpoMedico);
+                        break;
+                    case 6:
+                        System.out.println("Selecione el equipo.\n");
+                        Club.ListarClubes(clubList);
+                        clubIndex = input.nextInt();
+                        Club.listarCuerpoTecnico(clubList.get(clubIndex).getCuerpoTecnico());
+                        break;
+                    case 7:
+                        reportes(clubList, input, playerList);
                         break;
                     case 0:
                         flag = false;
@@ -63,8 +92,8 @@ public class Main {
     }
 
     
-    public static void reportes(ArrayList<Club> list, Scanner input ) {
-        System.out.print("\t1. Equipo con más goles\n\t2. Equipo con más puntos\n\t3. Equipo con más partidos ganados\n\t4. Total goles anotados.\n\t5. Promedio de goles.\n\t0. Salir.\n");
+    public static void reportes(ArrayList<Club> list, Scanner input, ArrayList<Jugador> playerList ) {
+        System.out.print("\t1. Equipo con más goles\n\t2. Equipo con más puntos\n\t3. Equipo con más partidos ganados\n\t4. Total goles anotados.\n\t5. Promedio de goles.\n\t6. Reportes jugador. \n\t0. Salir.\n");
         int opcUser = input.nextInt();
         switch (opcUser) {
             case 1:
@@ -86,11 +115,13 @@ public class Main {
                 double promedioGoles = Club.promGoles(list);
                 System.out.println(String.format("El promedio de goles fue %f", promedioGoles));
                 break;
+            case 6:
+                Jugador.reportesJugador(input, playerList, list);
+                break;
             case 0:
                 break;
             default:
                 break;
         }
     }
-    
 }
