@@ -215,6 +215,7 @@ public class Club {
             i++;
         }
     }
+    
     public static void listarCuerpoTecnico(ArrayList<CuerpoTecnico> cuerpoTecnicoList) {
         for (CuerpoTecnico integrante : cuerpoTecnicoList) {
             System.out.println(String.format("Nombre: %s Rol: %s", integrante.getNombre(), integrante.getRol()));
