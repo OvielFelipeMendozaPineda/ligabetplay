@@ -197,9 +197,15 @@ public class Club {
                 team = club;
                 majorMetric = metric.getMetric(club);
                 System.out.println(majorMetric);
+                System.out.println(mensaje + " " + team.getNombre());
             }
+            if (metric.getMetric(club) == majorMetric) {
+                mensaje = "Todos los equipos tienen los mismos puntos: " + metric.getMetric(club);
+                System.out.println(mensaje);
+            }
+            
         }
-        System.out.println(mensaje + " " + team.getNombre());
+        
     }
 
     public static void ListarClubes(ArrayList<Club> clubList) {

@@ -13,6 +13,7 @@ public class Partido {
     Club equipoVisitante;
     int golesEquipoLocal;
     int goleVisitante;
+    ArrayList<Jugador> goleadores;
 
     public Partido(String fecha, Club equipoLocal, Club equipoVisitante, int golesEquipoLocal, int goleVisitante) {
         this.fecha = fecha;
@@ -20,6 +21,7 @@ public class Partido {
         this.equipoVisitante = equipoVisitante;
         this.golesEquipoLocal = golesEquipoLocal;
         this.goleVisitante = goleVisitante;
+        this.goleadores = new ArrayList<Jugador>();
     }
     public String getFecha() {
         return fecha;
@@ -84,7 +86,16 @@ public class Partido {
         System.out.println(mensaje);
         return input.nextInt();
     }
-    public static Partido registrarPartido(ArrayList<Club> list, Scanner input) {
+    public static void setGoles(Scanner input, ArrayList<Club> list, ArrayList<Jugador> playerList, ArrayList<Jugador> goleadores)  {
+        Jugador.getPlantel(input, list);
+            int goleadoresIndex = input.nextInt();
+            System.out.println("Ingrese cantidad de goles hechos por: " + playerList.get(goleadoresIndex-1).getNombre());
+            int goles = input.nextInt();
+            playerList.get(goleadoresIndex-1).setTolesAnotados(goles);
+            goleadores.add(playerList.get(goleadoresIndex-1));
+    }
+
+    public static Partido registrarPartido(ArrayList<Club> list, Scanner input, ArrayList<Jugador> goleadores, ArrayList<Jugador> playerList)  {
         try {
             input.nextLine();
             String fecha = getInput("Ingrese la fecha en formato dd/mm/aaaa.", input);
@@ -96,7 +107,9 @@ public class Partido {
             list.add(equipoLocalIndex, equipoLocal);
             Club equipoVisitante = list.get(equipoVisitanteIndex);
             int golesEquipoLocal = getGoals(String.format("Ingrese goles marcados por %s", list.get(equipoLocalIndex).getNombre()), input);
+            Partido.setGoles(input, list, playerList, goleadores);
             int golesEquipoVisitante = getGoals(String.format("Ingrese goles marcados por %s", list.get(equipoVisitanteIndex).getNombre()), input);
+            Partido.setGoles(input, list, playerList, goleadores);
 
             Partido nuevoPartido = new Partido(fecha, equipoLocal, equipoVisitante, golesEquipoLocal, golesEquipoVisitante);
 

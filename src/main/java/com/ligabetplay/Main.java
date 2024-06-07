@@ -35,9 +35,9 @@ public class Main {
         clubList.add(equipo9);
         clubList.add(equipo10);
         ArrayList<Jugador> playerList = new ArrayList<>(); // LiSTADO CON TODOS LOS JUGADORES
-        Jugador jugador0 = new Jugador(1, "Oviel Felipe", "Mendoza Pineda", 20, 4, "Lateral Derecho","Colombiana" , "2024-06-04", 15, 4, 0);
+        Jugador jugador0 = new Jugador(1, "Oviel Felipe", "Mendoza Pineda", 20, 4, "Lateral Derecho","Colombiana" , "2024-06-04");
         playerList.add(jugador0);
-        equipo2.agregarJugadorPlantel(jugador0);
+        equipo1.agregarJugadorPlantel(jugador0);
         int clubIndex;
         boolean flag = true;
         while (flag) {
@@ -52,7 +52,7 @@ public class Main {
                         clubList.add(nuevoClub);
                         break;
                     case 2:
-                        Partido.registrarPartido(clubList, input);
+                        Partido.registrarPartido(clubList, input, playerList, playerList);
                         break;
                     case 3:
                         Jugador.registrarJugador(input);

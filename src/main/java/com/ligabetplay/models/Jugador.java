@@ -12,15 +12,15 @@ public class Jugador extends Team {
     int tarjetasAmarillas;
     int tarjetasRojas;
     public Jugador(int id, String nombre, String apellido, int edad, int dorsal, String posicion,
-            String nacionalidad, String fechaIngreso, int tolesAnotados, int tarjetasAmarillas, int tarjetasRojas) {
+            String nacionalidad, String fechaIngreso) {
         super(id, nombre, apellido, edad);
         this.dorsal = dorsal;
         this.posicion = posicion;
         this.nacionalidad = nacionalidad;
         this.fechaIngreso = fechaIngreso;
-        this.tolesAnotados = tolesAnotados;
-        this.tarjetasAmarillas = tarjetasAmarillas;
-        this.tarjetasRojas = tarjetasRojas;
+        this.tolesAnotados = 0;
+        this.tarjetasAmarillas = 0;
+        this.tarjetasRojas = 0;
     }
     
     
@@ -116,19 +116,9 @@ public class Jugador extends Team {
         String nacionalidad = input.nextLine();
         System.out.print("Ingrese la fecha de ingreso (YYYY-MM-DD): ");
         String fechaIngreso = input.nextLine();
-        System.out.print("Ingrese los goles anotados: ");
-        int golesAnotados = input.nextInt();
-        input.nextLine(); 
+        
 
-        System.out.print("Ingrese las tarjetas amarillas: ");
-        int tarjetasAmarillas = input.nextInt();
-        input.nextLine();
-
-        System.out.print("Ingrese las tarjetas rojas: ");
-        int tarjetasRojas = input.nextInt();
-        input.nextLine();
-
-        Jugador newJugador = new Jugador(id, nombre, apellido, edad, dorsal, posicion, nacionalidad, fechaIngreso, golesAnotados, tarjetasAmarillas, tarjetasRojas);
+        Jugador newJugador = new Jugador(id, nombre, apellido, edad, dorsal, posicion, nacionalidad, fechaIngreso);
         return newJugador;
     }
     
@@ -147,17 +137,27 @@ public class Jugador extends Team {
             System.out.println(mensaje + " " + player.getNombre());
         }
     }
+    
     public static void getPlantel(Scanner input, ArrayList<Club> list) {
         System.out.println("Seleccione el equipo para mostrar el plantel de jugadores\n");
         Club.ListarClubes(list);
+        int i = 0;
         Club equipo = list.get(input.nextInt()-1);
         for (Jugador jugador : equipo.getPlantel()) {
-            System.out.println("Nombre: " + jugador.getNombre() + " " + jugador.getApellido() );
+            System.out.println(i+1 + ". " + "Nombre: " + jugador.getNombre() + " " + jugador.getApellido() );
             System.out.println("Dorsal: " + jugador.getDorsal());
             System.out.println("Posicion " + jugador.getPosicion());
             System.out.println("-----------------------------------");
         }
     }
+    
+    public static void listarJugadores(ArrayList<Jugador> playerList) {
+        for (Jugador jugador : playerList) {
+            System.out.println("Jugadores en la base de datos");
+            System.out.println(String.format("Nombre: %s %s", jugador.getNombre(), jugador.getApellido()));
+        }
+    }
+
     public static void reportesJugador(Scanner input, ArrayList<Jugador> list, ArrayList<Club> clubList) {
         System.out.println("\t1. Jugador con más goles anotados\n\t2. Jugador con más tarjetas amarillas\n\t3. Jugador con más tarjetas rojas.\n\t4. Listar plantel por equipo.");
         switch (input.nextInt()) {
